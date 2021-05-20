@@ -1,15 +1,19 @@
+const { Client, Message, MessageEmbed } = require("discord.js");
+
 module.exports = {
-  name: 'say',
-  description: 'The say Command',
-  category: 'Utility',
-  aliases: [], //no aliases
-  run: async (client, message, args, prefix, config) => {
-    
-    if (!args.join(' ')) {
-      return message.channel.send(`Please give a text to say`);
-    }
-    
-    message.channel.send(args.join(' '));
-    
-  }
-}
+  name: "say",
+  /**
+   * @param {Client} client
+   * @param {Message} message
+   * @param {String[]} args
+   */
+  run: async (client, message, args) => {
+    const sayEmbed = new MessageEmbed()
+        .setAuthor(message.author.tag, message.author.displayAvatarURL({ dyanmic: true }))
+        .setDescription(args.join(" "))
+        .setTimestamp()
+        .setColor("RANDOM")
+
+    message.channel.send(sayEmbed)
+  },
+};
